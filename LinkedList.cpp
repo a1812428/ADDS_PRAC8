@@ -19,7 +19,6 @@ LinkedList::~LinkedList()
     {
         Node *node = helper;
         helper = helper->getNext();
-        node->setNext(NULL);
         delete (node);
     }
     this->head = NULL;
@@ -89,20 +88,22 @@ void LinkedList::deleteFront()
 {
     Node *helper = this->head;
     this->head = helper->getNext();
-    helper->setNext(NULL);
     delete (helper);
 }
 
 void LinkedList::deleteEnd()
 {
-    Node *helper;
-    if (head->getNext() == NULL)
+
+    if(this->head==NULL)
+        return;
+    if (this->head->getNext() == NULL)
     {
         delete (head);
-        head = NULL;
+        this->head = NULL;
     }
-    for (helper = this->head; helper->getNext()->getNext() != NULL; helper->getNext())
-    {
+    Node *helper = this->head;
+    while(helper->getNext()!=NULL && helper->getNext()->getNext() != NULL){
+        helper = helper->getNext();
     }
     delete (helper->getNext());
     helper->setNext(NULL);
@@ -119,8 +120,7 @@ void LinkedList::deletePosition(int position)
     if (position == 1)
     {
         Node *helper = this->head;
-        this->head = head->getNext();
-        helper->setNext(NULL);
+        this->head = this->head->getNext();
         delete (helper);
         return;
     }

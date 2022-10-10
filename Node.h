@@ -16,4 +16,5 @@ public:
     void setData(int data);
     void setNext(Node *next);
 };
+
 #endif
