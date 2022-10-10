@@ -19,6 +19,7 @@ LinkedList::~LinkedList()
     {
         Node *node = helper;
         helper = helper->getNext();
+        node->setNext(NULL);
         delete (node);
     }
     this->head = NULL;
@@ -53,7 +54,7 @@ void LinkedList::addAtPosition(int position, int newItem)
     Node *helper;
     Node *n = new Node(newItem);
     int pos = 1;
-    if (position < 1 || position == 1)
+    if (position <= 1)
     {
         addFront(newItem);
         return;
@@ -76,8 +77,10 @@ int LinkedList::search(int item)
     int i = 1;
     for (Node *helper = this->head; helper != NULL; helper = helper->getNext())
     {
-        if (item == helper->getData())
+        if (item == helper->getData()){
             cout << i << " " << endl;
+            return i;
+        }
         i++;
     }
     cout << "0 ";
@@ -94,7 +97,7 @@ void LinkedList::deleteFront()
 void LinkedList::deleteEnd()
 {
 
-    if(this->head==NULL)
+    if (this->head == NULL)
         return;
     if (this->head->getNext() == NULL)
     {
@@ -102,7 +105,8 @@ void LinkedList::deleteEnd()
         this->head = NULL;
     }
     Node *helper = this->head;
-    while(helper->getNext()!=NULL && helper->getNext()->getNext() != NULL){
+    while (helper->getNext() != NULL && helper->getNext()->getNext() != NULL)
+    {
         helper = helper->getNext();
     }
     delete (helper->getNext());

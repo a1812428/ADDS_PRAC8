@@ -3,7 +3,7 @@
 Node::Node(int data)
 {
     this->data = data;
-    next = NULL;
+    this->next = NULL;
 }
 
 int Node::getData()
@@ -11,7 +11,7 @@ int Node::getData()
     return this->data;
 }
 
-Node * Node::getNext()
+Node *Node::getNext()
 {
     return this->next;
 }
